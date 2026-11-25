@@ -1,0 +1,218 @@
+{
+  "dealers": [
+    {
+      "id": "dealer-1",
+      "name": "Tashkent Auto Plaza",
+      "city": "Ташкент",
+      "address": "ул. Амира Темура, 108",
+      "phone": "+998901234567",
+      "verified": true,
+      "rating": 4.9
+    },
+    {
+      "id": "dealer-2",
+      "name": "BYD Sergeli Center",
+      "city": "Ташкент",
+      "address": "Сергелийский р-н, авторынок, блок 3",
+      "phone": "+998907654321",
+      "verified": true,
+      "rating": 4.8
+    },
+    {
+      "id": "dealer-3",
+      "name": "Samarkand Motors",
+      "city": "Самарканд",
+      "address": "ул. Рудаки, 45",
+      "phone": "+998915551122",
+      "verified": true,
+      "rating": 4.7
+    }
+  ],
+  "cars": [
+    {
+      "id": "car-1",
+      "dealerId": "dealer-1",
+      "brand": "Chevrolet",
+      "model": "Malibu XL",
+      "year": 2025,
+      "priceUZS": 419000000,
+      "priceUSD": 32500,
+      "fuelType": "Бензин",
+      "transmission": "Автомат",
+      "bodyType": "Седан",
+      "mileage": 0,
+      "city": "Ташкент",
+      "images": [
+        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "2.0L Turbo",
+        "powerHp": 236,
+        "acceleration": "7.2 с",
+        "color": "Черный металлик"
+      },
+      "inStock": true,
+      "featured": true,
+      "createdAt": "2026-11-20T10:00:00Z"
+    },
+    {
+      "id": "car-2",
+      "dealerId": "dealer-2",
+      "brand": "BYD",
+      "model": "Song Plus Champion",
+      "year": 2025,
+      "priceUZS": 387000000,
+      "priceUSD": 30000,
+      "fuelType": "Гибрид",
+      "transmission": "Автомат",
+      "bodyType": "Кроссовер",
+      "mileage": 0,
+      "city": "Ташкент",
+      "images": [
+        "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "1.5L DM-i Hybrid",
+        "powerHp": 197,
+        "acceleration": "7.9 с",
+        "color": "Белый жемчуг"
+      },
+      "inStock": true,
+      "featured": true,
+      "createdAt": "2026-11-21T11:30:00Z"
+    },
+    {
+      "id": "car-3",
+      "dealerId": "dealer-1",
+      "brand": "Kia",
+      "model": "K5 GT Line",
+      "year": 2025,
+      "priceUZS": 445000000,
+      "priceUSD": 34500,
+      "fuelType": "Бензин",
+      "transmission": "Автомат",
+      "bodyType": "Седан",
+      "mileage": 0,
+      "city": "Ташкент",
+      "images": [
+        "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "2.5L GDI",
+        "powerHp": 194,
+        "acceleration": "8.6 с",
+        "color": "Серый графит"
+      },
+      "inStock": true,
+      "featured": true,
+      "createdAt": "2026-11-22T09:15:00Z"
+    },
+    {
+      "id": "car-4",
+      "dealerId": "dealer-3",
+      "brand": "Chevrolet",
+      "model": "Tracker Premier",
+      "year": 2025,
+      "priceUZS": 258000000,
+      "priceUSD": 20000,
+      "fuelType": "Бензин",
+      "transmission": "Автомат",
+      "bodyType": "Кроссовер",
+      "mileage": 0,
+      "city": "Самарканд",
+      "images": [
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "1.2L Turbo",
+        "powerHp": 132,
+        "acceleration": "10.1 с",
+        "color": "Синий"
+      },
+      "inStock": true,
+      "featured": false,
+      "createdAt": "2026-11-23T14:20:00Z"
+    },
+    {
+      "id": "car-5",
+      "dealerId": "dealer-2",
+      "brand": "BYD",
+      "model": "Chazor",
+      "year": 2025,
+      "priceUZS": 310000000,
+      "priceUSD": 24000,
+      "fuelType": "Гибрид",
+      "transmission": "Автомат",
+      "bodyType": "Седан",
+      "mileage": 0,
+      "city": "Ташкент",
+      "images": [
+        "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "1.5L DM-i",
+        "powerHp": 180,
+        "acceleration": "7.3 с",
+        "color": "Серебристый"
+      },
+      "inStock": true,
+      "featured": true,
+      "createdAt": "2026-11-24T08:45:00Z"
+    },
+    {
+      "id": "car-6",
+      "dealerId": "dealer-3",
+      "brand": "Hyundai",
+      "model": "Tucson",
+      "year": 2024,
+      "priceUZS": 430000000,
+      "priceUSD": 33300,
+      "fuelType": "Бензин",
+      "transmission": "Автомат",
+      "bodyType": "Кроссовер",
+      "mileage": 1200,
+      "city": "Самарканд",
+      "images": [
+        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=80"
+      ],
+      "specs": {
+        "engine": "2.0L MPI",
+        "powerHp": 150,
+        "acceleration": "10.8 с",
+        "color": "Темно-зеленый"
+      },
+      "inStock": true,
+      "featured": false,
+      "createdAt": "2026-11-24T16:10:00Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "order-1",
+      "carId": "car-1",
+      "dealerId": "dealer-1",
+      "customerName": "Азиз Каримов",
+      "customerPhone": "+998909876543",
+      "type": "test-drive",
+      "status": "pending",
+      "createdAt": "2026-11-25T12:00:00Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Tashkent Auto Plaza",
+      "email": "dealer@autouz.uz",
+      "role": "dealer",
+      "dealerId": "dealer-1"
+    },
+    {
+      "id": "user-2",
+      "name": "Сардор (Покупатель)",
+      "email": "client@autouz.uz",
+      "role": "client",
+      "dealerId": null
+    }
+  ]
+}
