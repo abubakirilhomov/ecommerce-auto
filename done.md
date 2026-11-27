@@ -42,3 +42,13 @@
   - В `src/services/carsService.js` добавлена поддержка query-параметров в `getAll(params)`, а также методы `getFiltered(filters)`, `getByDealer(dealerId)` и `getFeatured()`.
 - **Как проверено**:
   - `npm run build` прошел успешно; селекторы фильтрации, `toggleFavorite` и `toggleCompare` (включая ограничение до 3 авто) проверены автотестом на данных из `server/db.json`.
+
+### [T-105] Настройка дизайн-системы и тем DaisyUI (AutoUz)
+- **Исполнитель**: Руфина
+- **Ветка**: `feat/rufina-daisyui-theme`
+- **Дата**: 2026-11-25
+- **Что сделано**:
+  - В `src/styles/main.css` настроены токены Tailwind CSS v4 (`@theme` с `--font-sans` и `--font-display`, фирменные цвета бренда), кастомные темы DaisyUI v5 `light` (по умолчанию) и `dark` (`prefersdark: true`) с брендовой палитрой AutoUz (`#2563eb` / `#3b82f6`, бирюзовый акцент `#06b6d4` / `#22d3ee`, поверхности `#ffffff` / `#f4f7fb` и `#131c31` / `#0f172a`, скругления и базовые хелперы `.autouz-price`, `.autouz-card-hover`).
+  - В `index.html` подключены шрифты Google Fonts `Inter` и `Manrope` (с поддержкой кириллицы) и применены базовые классы типографики и плавного переключения темы.
+- **Как проверено**:
+  - `npm run build` (`vite build`) выполнен успешно за 929ms; в собранном CSS проверено наличие переменных обеих тем (`light` и `dark`) и шрифтов без дублирования стандартных тем DaisyUI.

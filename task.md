@@ -25,7 +25,7 @@
 
 ### 🎨 Руфина (12 лет — UI/UX и Визуал)
 *Фокус: красота, цвета, иллюстрации/иконки, гармония интерфейса.*
-- [ ] **T-105**: Настройка дизайн-системы и тем DaisyUI (светлая и темная тема, брендовые цвета AutoUz, шрифты).
+- [x] **T-105**: Настройка дизайн-системы и тем DaisyUI (светлая и темная тема, брендовые цвета AutoUz, шрифты).
   - *Файлы*: `src/styles/main.css`, `index.html`
 - [ ] **T-106**: Верстка шапки (`Header.js`), подвала (`Footer.js`) и мобильного меню (`MobileNav.js`) с переключателем темы.
   - *Файлы*: `src/components/layout/Header.js`, `src/components/layout/Footer.js`, `src/components/layout/MobileNav.js`
