@@ -36,7 +36,7 @@
 *Фокус: защита от взлома (XSS), валидация, авторизация, оффлайн-режим.*
 - [ ] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
   - *Файлы*: `src/utils/sanitize.js`, `src/utils/validators.js`
-- [ ] **T-109**: Настройка PWA (`public/manifest.webmanifest`, интеграция `vite-plugin-pwa` или `src/sw.js` для кэширования).
+- [x] **T-109**: Настройка PWA (`public/manifest.webmanifest`, интеграция `vite-plugin-pwa` или `src/sw.js` для кэширования).
   - *Файлы*: `public/manifest.webmanifest`, `src/sw.js` (или `vite.config.js`)
 
 ---
@@ -75,7 +75,7 @@
   - *Файлы*: `src/pages/DealerPage.js`, `src/components/dealer/DealerCarForm.js`
 
 ### 🛡 Абдуллох (12 лет — Роли и Защита кабинета)
-- [ ] **T-304**: Страница входа и выбора роли (`AuthPage.js` + `authService.js`): Клиент или Автосалон, защита маршрута `DealerPage` от неавторизованных пользователей.
+- [x] **T-304**: Страница входа и выбора роли (`AuthPage.js` + `authService.js`): Клиент или Автосалон, защита маршрута `DealerPage` от неавторизованных пользователей.
   - *Файлы*: `src/pages/AuthPage.js`, `src/services/authService.js`
 
 ### 🎨 Руфина (12 лет — Финальная полировка UI)
