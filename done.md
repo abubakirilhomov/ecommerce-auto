@@ -32,3 +32,13 @@
   - Собрана стартовая точка входа `src/app.js` с проверкой подключения к `json-server` и маршрутами-заглушками для команды.
 - **Как проверено**:
   - `npm run build` выполнен успешно.
+
+### [T-110] Расширение `store.js` и фильтрация в `carsService.js`
+- **Исполнитель**: Амирхон
+- **Ветка / Коммит**: `feat/amirxon-store-selectors`
+- **Дата**: 2026-11-25
+- **Что сделано**:
+  - В `src/core/store.js` добавлены константы `DEFAULT_FILTERS`, `MAX_COMPARE_ITEMS` (3), селекторы `selectFilteredCars`, `selectFilterOptions`, `selectFavoriteCars`, `selectCompareCars`, `isFavorite`, `isInCompare` и хелперы `toggleFavorite`, `toggleCompare`, `setFilters`, `resetFilters` (доступны как именованные экспорты и методы `store`).
+  - В `src/services/carsService.js` добавлена поддержка query-параметров в `getAll(params)`, а также методы `getFiltered(filters)`, `getByDealer(dealerId)` и `getFeatured()`.
+- **Как проверено**:
+  - `npm run build` прошел успешно; селекторы фильтрации, `toggleFavorite` и `toggleCompare` (включая ограничение до 3 авто) проверены автотестом на данных из `server/db.json`.
