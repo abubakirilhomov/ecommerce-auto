@@ -42,3 +42,15 @@
   - В `src/services/carsService.js` добавлена поддержка query-параметров в `getAll(params)`, а также методы `getFiltered(filters)`, `getByDealer(dealerId)` и `getFeatured()`.
 - **Как проверено**:
   - `npm run build` прошел успешно; селекторы фильтрации, `toggleFavorite` и `toggleCompare` (включая ограничение до 3 авто) проверены автотестом на данных из `server/db.json`.
+
+### [T-109] Компонент установки PWA и индикатор оффлайн-режима
+- **Исполнитель**: Абдуллох
+- **Ветка**: `feat/abdulloh-pwa-install`
+- **Дата**: 2026-11-27
+- **Что сделано**:
+  - Создан компонент [InstallPrompt.js](src/components/ui/InstallPrompt.js):
+    - `InstallPrompt(props)` — чистый рендер баннера установки PWA и индикатора оффлайн/онлайн статуса на DaisyUI + Tailwind CSS с экранированием текста через `escapeHtml`.
+    - `initInstallPrompt(customContainer)` — обработка событий `beforeinstallprompt`, `appinstalled`, `online`, `offline`, скрытие баннера на текущую сессию через `sessionStorage`, возврат функции `cleanup()`.
+  - Компонент подключен в [src/app.js](src/app.js) внутри `bootstrap()`.
+- **Как проверено**:
+  - Проверено в браузере через `npm run build` и `npm run preview` (оффлайн/онлайн уведомления и баннер установки PWA).
