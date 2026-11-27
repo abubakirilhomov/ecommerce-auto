@@ -22,14 +22,16 @@
   - *Файлы*: `src/services/apiClient.js`, `src/services/carsService.js`, `src/services/dealersService.js`
 - [x] **T-110**: Расширение `store.js` (селекторы фильтрации авто и хелперы `toggleFavorite`, `toggleCompare`) + ревью PR команды в `dev`.
   - *Файлы*: `src/core/store.js`, `src/services/carsService.js`
+- [ ] **T-111**: Добавить `setTheme(theme)` и `loadInitialData()` (параллельная загрузка `cars` и `dealers` с обработкой ошибок) + ревью PR команды строго в ветку `dev`.
+  - *Файлы*: `src/core/store.js`, `src/services/carsService.js`, `src/services/dealersService.js`
 
 ### 🎨 Руфина (12 лет — UI/UX и Визуал)
 *Фокус: красота, цвета, иллюстрации/иконки, гармония интерфейса.*
 - [x] **T-105**: Настройка дизайн-системы и тем DaisyUI (светлая и темная тема, брендовые цвета AutoUz, шрифты).
   - *Файлы*: `src/styles/main.css`, `index.html`
-- [ ] **T-106**: Верстка шапки (`Header.js`), подвала (`Footer.js`) и мобильного меню (`MobileNav.js`) с переключателем темы.
+- [ ] **T-106**: Верстка шапки (`Header.js`), подвала (`Footer.js`) и мобильного меню (`MobileNav.js`) с переключателем темы, логотипом и счётчиками избранного/сравнения.
   - *Файлы*: `src/components/layout/Header.js`, `src/components/layout/Footer.js`, `src/components/layout/MobileNav.js`
-- [ ] **T-107**: Создание набора SVG-иконок и красивых заглушек/логотипов автосалонов + иконки для PWA (`192x192`, `512x512`).
+- [ ] **T-107**: Подготовка графики: showcase-изображение автомобиля для Hero-баннера, набор SVG-иконок, логотипы автосалонов и заглушка `car-placeholder.svg` + иконки PWA (`192x192`, `512x512`).
   - *Файлы*: `public/icons/*`, `public/images/*`
 
 ### 🛡 Абдуллох (12 лет — Безопасность и PWA)
