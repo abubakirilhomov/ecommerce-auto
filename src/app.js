@@ -1,8 +1,7 @@
 import './styles/main.css';
 import { Router } from './core/router.js';
-import { store } from './core/store.js';
+import { store, setTheme, loadInitialData } from './core/store.js';
 import { renderToContainer } from './core/component.js';
-import { carsService } from './services/carsService.js';
 import { escapeHtml } from './utils/sanitize.js';
 
 /**
@@ -10,8 +9,7 @@ import { escapeHtml } from './utils/sanitize.js';
  */
 function renderBaseHeader() {
   const headerEl = document.getElementById('app-header');
-  const { theme } = store.getState();
-  document.documentElement.setAttribute('data-theme', theme);
+  setTheme(store.getState().theme);
 
   renderToContainer(
     headerEl,
@@ -35,32 +33,37 @@ function renderBaseHeader() {
  * Стартовая страница-заглушка для проверки работы ядра и API.
  */
 async function renderStarterHome(outlet) {
-  let apiStatus = 'Проверка подключения к json-server...';
-  let carsCount = 0;
+  const result = await loadInitialData({ force: true });
+  const apiStatus = result.ok
+    ? `API подключен (${result.cars.length} авто, ${result.dealers.length} автосалонов)`
+    : result.error || 'json-server не запущен (запустите: npm run server)';
 
-  try {
-    const cars = await carsService.getAll();
-    store.setState({ cars });
-    carsCount = cars.length;
-    apiStatus = `API подключен (${carsCount} авто в базе)`;
-  } catch {
-    apiStatus = 'json-server не запущен (запустите: npm run server)';
-  }
+  const showcaseCar = store.getState().cars[0];
+  const showcaseImage =
+    showcaseCar?.images?.[0] ||
+    'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
 
   renderToContainer(
     outlet,
     `
-      <section class="hero bg-base-100 rounded-2xl shadow-md p-8 text-center">
-        <div class="max-w-2xl">
-          <div class="badge badge-primary badge-outline mb-3">Фундамент готов</div>
-          <h1 class="text-3xl md:text-4xl font-bold mb-4">AutoUz — Маркетплейс автосалонов</h1>
-          <p class="opacity-80 mb-6">
-            SPA-ядро, роутер, Store и API-клиент настроены. Статус базы:
-            <span class="font-semibold">${escapeHtml(apiStatus)}</span>
-          </p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <a href="#/catalog" class="btn btn-primary">Перейти в каталог</a>
-            <a href="#/dealer" class="btn btn-outline">Кабинет автосалона</a>
+      <section class="hero bg-base-100 rounded-2xl shadow-md p-6 md:p-10">
+        <div class="hero-content flex-col lg:flex-row-reverse gap-8 w-full justify-between">
+          <img
+            src="${escapeHtml(showcaseImage)}"
+            alt="AutoUz Showcase"
+            class="w-full max-w-md rounded-xl shadow-lg object-cover aspect-video"
+          />
+          <div class="max-w-xl text-center lg:text-left">
+            <div class="badge badge-primary badge-outline mb-3">Фундамент готов</div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">AutoUz — Маркетплейс автосалонов</h1>
+            <p class="opacity-80 mb-6">
+              SPA-ядро, роутер, Store и API-клиент настроены. Статус базы:
+              <span class="font-semibold">${escapeHtml(apiStatus)}</span>
+            </p>
+            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+              <a href="#/catalog" class="btn btn-primary">Перейти в каталог</a>
+              <a href="#/dealer" class="btn btn-outline">Кабинет автосалона</a>
+            </div>
           </div>
         </div>
       </section>

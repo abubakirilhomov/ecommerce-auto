@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Avto Market — iOS Auto Marketplace &amp; PWA</title>
+
+  <!-- Dynamic PWA Theme Color (syncs with iOS Light / Dark Mode) -->
+  <meta id="meta-theme-color" name="theme-color" content="#000000" />
+  <meta name="description" content="iOS-styled car marketplace built with DaisyUI, GSAP animations, and Progressive Web App (PWA) support." />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Avto Market" />
+
+  <!-- Inline PWA Manifest injected cleanly via JS -->
+  <link id="pwa-manifest" rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Avto%20Market%22%7D" />
+
+  <!-- Tailwind CSS + DaisyUI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: [
+              '-apple-system',
+              'BlinkMacSystemFont',
+              '"SF Pro Display"',
+              '"SF Pro Text"',
+              'Inter',
+              'system-ui',
+              'sans-serif'
+            ]
+          },
+          borderRadius: {
+            'ios-xs': '10px',
+            'ios-sm': '14px',
+            'ios-md': '18px',
+            'ios-lg': '22px',
+            'ios-xl': '26px',
+            'ios-2xl': '32px'
+          }
+        }
+      }
+    };
+  </script>
+  
+  <script src="avto.js" src="./main.js"></script>
