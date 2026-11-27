@@ -32,3 +32,13 @@
   - Собрана стартовая точка входа `src/app.js` с проверкой подключения к `json-server` и маршрутами-заглушками для команды.
 - **Как проверено**:
   - `npm run build` выполнен успешно.
+
+### [T-108] Модуль защиты от XSS и валидаторы форм
+- **Исполнитель**: Абдуллох
+- **Ветка**: `feat/abdulloh-validators-xss`
+- **Дата**: 2026-11-25
+- **Что сделано**:
+  - Дополнен `src/utils/sanitize.js`: добавлены `sanitizeUrl` (блокировка `javascript:`, `data:`, `vbscript:`, `//...` и кодирование опасных символов атрибутов) и `sanitizeText`, сохранена `escapeHtml`.
+  - Создан `src/utils/validators.js`: реализованы `validateRequired`, `validateLength`, `normalizeUzPhone`, `validateUzPhone`, `validatePrice`, `validateYear`, `validateMileage`, `validateEmail`, `validateSafeUrl`, `validateForm` и булевы хелперы (`isNonEmpty`, `isValidUzPhone`, `isValidPrice`, `isValidYear`, `isValidEmail`).
+- **Как проверено**:
+  - `npm run build` (`vite build`) выполнен успешно; все функции проверены через Node.js (`assert`).

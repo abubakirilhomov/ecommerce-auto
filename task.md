@@ -34,7 +34,7 @@
 
 ### 🛡 Абдуллох (12 лет — Безопасность и PWA)
 *Фокус: защита от взлома (XSS), валидация, авторизация, оффлайн-режим.*
-- [ ] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
+- [x] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
   - *Файлы*: `src/utils/sanitize.js`, `src/utils/validators.js`
 - [ ] **T-109**: Настройка PWA (`public/manifest.webmanifest`, интеграция `vite-plugin-pwa` или `src/sw.js` для кэширования).
   - *Файлы*: `public/manifest.webmanifest`, `src/sw.js` (или `vite.config.js`)
