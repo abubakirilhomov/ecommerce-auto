@@ -1,8 +1,7 @@
 import './styles/main.css';
 import { Router } from './core/router.js';
-import { store } from './core/store.js';
+import { store, setTheme, loadInitialData } from './core/store.js';
 import { renderToContainer } from './core/component.js';
-import { carsService } from './services/carsService.js';
 import { escapeHtml } from './utils/sanitize.js';
 
 /**
@@ -10,8 +9,7 @@ import { escapeHtml } from './utils/sanitize.js';
  */
 function renderBaseHeader() {
   const headerEl = document.getElementById('app-header');
-  const { theme } = store.getState();
-  document.documentElement.setAttribute('data-theme', theme);
+  setTheme(store.getState().theme);
 
   renderToContainer(
     headerEl,
@@ -35,17 +33,10 @@ function renderBaseHeader() {
  * Стартовая страница-заглушка для проверки работы ядра и API.
  */
 async function renderStarterHome(outlet) {
-  let apiStatus = 'Проверка подключения к json-server...';
-  let carsCount = 0;
-
-  try {
-    const cars = await carsService.getAll();
-    store.setState({ cars });
-    carsCount = cars.length;
-    apiStatus = `API подключен (${carsCount} авто в базе)`;
-  } catch {
-    apiStatus = 'json-server не запущен (запустите: npm run server)';
-  }
+  const result = await loadInitialData({ force: true });
+  const apiStatus = result.ok
+    ? `API подключен (${result.cars.length} авто, ${result.dealers.length} автосалонов)`
+    : result.error || 'json-server не запущен (запустите: npm run server)';
 
   const showcaseCar = store.getState().cars[0];
   const showcaseImage =

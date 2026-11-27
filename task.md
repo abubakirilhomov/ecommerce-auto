@@ -22,7 +22,7 @@
   - *Файлы*: `src/services/apiClient.js`, `src/services/carsService.js`, `src/services/dealersService.js`
 - [x] **T-110**: Расширение `store.js` (селекторы фильтрации авто и хелперы `toggleFavorite`, `toggleCompare`) + ревью PR команды в `dev`.
   - *Файлы*: `src/core/store.js`, `src/services/carsService.js`
-- [ ] **T-111**: Добавить `setTheme(theme)` и `loadInitialData()` (параллельная загрузка `cars` и `dealers` с обработкой ошибок) + ревью PR команды строго в ветку `dev`.
+- [x] **T-111**: Добавить `setTheme(theme)` и `loadInitialData()` (параллельная загрузка `cars` и `dealers` с обработкой ошибок) + ревью PR команды строго в ветку `dev`.
   - *Файлы*: `src/core/store.js`, `src/services/carsService.js`, `src/services/dealersService.js`
 
 ### 🎨 Руфина (12 лет — UI/UX и Визуал)

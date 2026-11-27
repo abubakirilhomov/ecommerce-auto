@@ -1,24 +1,12 @@
-import { apiRequest } from './apiClient.js';
-
-function buildQueryString(params = {}) {
-  const searchParams = new URLSearchParams();
-
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null && value !== '') {
-      searchParams.set(key, String(value));
-    }
-  });
-
-  const query = searchParams.toString();
-  return query ? `?${query}` : '';
-}
+import { apiRequest, buildQueryString } from './apiClient.js';
 
 /**
  * Сервис для работы с каталогом автомобилей.
  */
 export const carsService = {
-  getAll(params = {}) {
-    return apiRequest(`/cars${buildQueryString(params)}`);
+  async getAll(params = {}) {
+    const data = await apiRequest(`/cars${buildQueryString(params)}`);
+    return Array.isArray(data) ? data : [];
   },
 
   /**

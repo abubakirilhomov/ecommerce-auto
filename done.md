@@ -52,3 +52,15 @@
   - В `index.html` подключены шрифты Google Fonts `Inter` и `Manrope` (с поддержкой кириллицы) и применены базовые классы типографики и плавного переключения темы.
 - **Как проверено**:
   - `npm run build` (`vite build`) выполнен успешно за 929ms; в собранном CSS проверено наличие переменных обеих тем (`light` и `dark`) и шрифтов без дублирования стандартных тем DaisyUI.
+
+### [T-111] Темы (`setTheme`) и параллельная начальная загрузка (`loadInitialData`)
+- **Исполнитель**: Амирхон
+- **Ветка**: `feat/amirkhon-theme-init`
+- **Дата**: 2026-11-27
+- **Что сделано**:
+  - В `src/core/store.js` добавлены `SUPPORTED_THEMES`, `setTheme(theme)`, `toggleTheme()` (валидация темы `'light'`/`'dark'`, применение `data-theme` на `<html>`, сохранение в `localStorage`, событие `theme-change` в `eventBus`), состояние `loading`/`error`/`initialized` и `loadInitialData({ force })` с параллельной загрузкой `cars` и `dealers` через `Promise.allSettled`, дедупликацией параллельных вызовов и обработкой частичных/полных ошибок (доступны как именованные экспорты и методы `store`).
+  - В `src/services/apiClient.js` вынесен общий хелпер `buildQueryString(params)`, исправлен порядок слияния `headers` в `apiRequest` и обеспечена безопасная проверка `import.meta.env?.VITE_API_URL`.
+  - В `src/services/carsService.js` и `src/services/dealersService.js` унифицирована сборка query-параметров через `buildQueryString`, добавлены нормализация массивов в `getAll()` и методы `dealersService.getVerified()` и `dealersService.getByCity(city)`.
+  - В `src/app.js` стартовая страница переведена на `setTheme()` и `loadInitialData()`.
+- **Как проверено**:
+  - Node-автотест (`verify_t111.mjs`) проверил `setTheme`, `toggleTheme`, `loadInitialData` (параллельную загрузку, кэширование, `force: true`, частичный сбой 500 и сетевую ошибку) и методы сервисов; `npm run build` (`vite build`) выполнен успешно.

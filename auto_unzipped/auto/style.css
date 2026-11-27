@@ -1,0 +1,159 @@
+* {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--ios-bg);
+      color: var(--ios-label);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, sans-serif;
+      transition: background-color 0.32s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
+      overflow-x: hidden;
+    }
+
+    .ios-frosted-nav {
+      background: var(--ios-nav-bg);
+      backdrop-filter: saturate(180%) blur(22px);
+      -webkit-backdrop-filter: saturate(180%) blur(22px);
+      border-bottom: 1px solid var(--ios-separator);
+      transition: background-color 0.32s ease, border-color 0.32s ease;
+    }
+
+    .ios-card {
+      background-color: var(--ios-surface);
+      border: 1px solid var(--ios-hairline);
+      border-radius: 26px;
+      box-shadow: var(--ios-card-shadow);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  background-color 0.32s ease,
+                  border-color 0.32s ease;
+    }
+
+    .ios-card:hover {
+      box-shadow: var(--ios-card-shadow-hover);
+    }
+
+    .ios-grouped-panel {
+      background-color: var(--ios-surface);
+      border: 1px solid var(--ios-hairline);
+      border-radius: 24px;
+      box-shadow: var(--ios-card-shadow);
+      transition: background-color 0.32s ease, border-color 0.32s ease;
+    }
+
+    .ios-inset-box {
+      background-color: var(--ios-grouped-fill);
+      border-radius: 16px;
+      transition: background-color 0.25s ease;
+    }
+
+    .ios-image-wrap img {
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ios-card:hover .ios-image-wrap img {
+      transform: scale(1.06);
+    }
+
+    /* iOS Segmented Pill Switch (Light / Dark) */
+    .ios-segmented {
+      position: relative;
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: var(--ios-segment-bg);
+      padding: 3px;
+      border-radius: 9999px;
+      border: 1px solid var(--ios-hairline);
+      user-select: none;
+    }
+
+    .ios-segment-thumb {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      width: calc(50% - 3px);
+      border-radius: 9999px;
+      background: var(--ios-segment-thumb);
+      box-shadow: var(--ios-segment-thumb-shadow);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ios-segment-btn {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border-radius: 9999px;
+      cursor: pointer;
+      color: var(--ios-label-secondary);
+      transition: color 0.22s ease, transform 0.14s ease;
+    }
+
+    .ios-segment-btn:active {
+      transform: scale(0.95);
+    }
+
+    .ios-segment-btn[aria-pressed="true"] {
+      color: var(--ios-label);
+    }
+
+    .ios-btn-primary {
+      background-color: var(--ios-blue);
+      color: #FFFFFF;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .ios-btn-primary:hover {
+      background-color: var(--ios-blue-hover);
+    }
+
+    .ios-btn-primary:active {
+      transform: scale(0.96);
+    }
+
+    .ios-pill-btn {
+      background-color: var(--ios-grouped-fill);
+      color: var(--ios-label);
+      border: 1px solid var(--ios-hairline);
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .ios-pill-btn:hover {
+      background-color: var(--ios-grouped-fill-hover);
+    }
+
+    .ios-pill-btn:active {
+      transform: scale(0.95);
+    }
+
+    .ios-pill-btn.is-active {
+      background-color: var(--ios-blue);
+      color: #FFFFFF;
+      border-color: transparent;
+      box-shadow: 0 6px 16px -4px rgba(0, 122, 255, 0.45);
+    }
+
+    .ios-modal-box {
+      background-color: var(--ios-surface);
+      color: var(--ios-label);
+      border: 1px solid var(--ios-separator);
+      border-radius: 28px;
+      box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.45);
+    }
+
+    .tabular-nums-price {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.025em;}

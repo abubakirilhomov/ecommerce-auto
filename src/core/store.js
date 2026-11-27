@@ -1,9 +1,14 @@
+import { eventBus } from './eventBus.js';
+import { carsService } from '../services/carsService.js';
+import { dealersService } from '../services/dealersService.js';
+
 const FAVORITES_KEY = 'autouz_favorites';
 const COMPARE_KEY = 'autouz_compare';
 const THEME_KEY = 'autouz_theme';
 const USER_KEY = 'autouz_user';
 
 export const MAX_COMPARE_ITEMS = 3;
+export const SUPPORTED_THEMES = Object.freeze(['light', 'dark']);
 
 export const DEFAULT_FILTERS = Object.freeze({
   search: '',
@@ -25,6 +30,29 @@ function readJsonStorage(key, fallback) {
 function readArrayStorage(key) {
   const value = readJsonStorage(key, []);
   return Array.isArray(value) ? value : [];
+}
+
+function readThemeStorage() {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    return SUPPORTED_THEMES.includes(saved) ? saved : 'light';
+  } catch {
+    return 'light';
+  }
+}
+
+function applyThemeToDocument(theme) {
+  if (typeof document !== 'undefined' && document.documentElement) {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+}
+
+function formatLoadError(reason, label) {
+  const raw = reason instanceof Error ? reason.message : String(reason || '');
+  if (/failed to fetch|fetch failed|networkerror|econnrefused/i.test(raw)) {
+    return `${label}: сервер API недоступен (запустите: npm run server)`;
+  }
+  return raw ? `${label}: ${raw}` : label;
 }
 
 function matchesFilterValue(carValue, filterValue) {
@@ -89,6 +117,18 @@ class Store {
     return toggleCompare(carId);
   }
 
+  setTheme(theme) {
+    return setTheme(theme);
+  }
+
+  toggleTheme() {
+    return toggleTheme();
+  }
+
+  loadInitialData(options) {
+    return loadInitialData(options);
+  }
+
   persist() {
     try {
       localStorage.setItem(FAVORITES_KEY, JSON.stringify(this.state.favorites));
@@ -112,8 +152,16 @@ export const store = new Store({
   favorites: readArrayStorage(FAVORITES_KEY),
   compareList: readArrayStorage(COMPARE_KEY).slice(0, MAX_COMPARE_ITEMS),
   currentUser: readJsonStorage(USER_KEY, null),
-  theme: localStorage.getItem(THEME_KEY) || 'light',
+  theme: readThemeStorage(),
+  loading: false,
+  error: null,
+  initialized: false,
 });
+
+applyThemeToDocument(store.getState().theme);
+
+let initialDataPromise = null;
+let loadGeneration = 0;
 
 /**
  * Возвращает список автомобилей с учетом текущих фильтров.
@@ -286,4 +334,119 @@ export function toggleCompare(carId) {
   });
 
   return result;
+}
+
+/**
+ * Устанавливает тему оформления ('light' | 'dark'), применяет её к DOM и сохраняет в localStorage.
+ * @param {'light'|'dark'} theme
+ * @returns {'light'|'dark'}
+ */
+export function setTheme(theme) {
+  if (!SUPPORTED_THEMES.includes(theme)) {
+    return store.getState().theme;
+  }
+
+  applyThemeToDocument(theme);
+
+  if (store.getState().theme !== theme) {
+    store.setState({ theme });
+    eventBus.emit('theme-change', theme);
+  }
+
+  return theme;
+}
+
+/**
+ * Переключает тему между светлой и темной.
+ * @returns {'light'|'dark'}
+ */
+export function toggleTheme() {
+  const nextTheme = store.getState().theme === 'dark' ? 'light' : 'dark';
+  return setTheme(nextTheme);
+}
+
+function resolveInitialCollection(result, fallback, source, label, errors) {
+  if (result.status === 'fulfilled') {
+    return result.value;
+  }
+  errors.push({
+    source,
+    message: formatLoadError(result.reason, label),
+  });
+  return fallback;
+}
+
+/**
+ * Параллельно загружает начальные данные (автомобили и автосалоны) в store с обработкой ошибок.
+ * @param {Object} [options]
+ * @param {boolean} [options.force=false] - принудительно перезагрузить данные даже если они уже загружены
+ * @returns {Promise<{ ok: boolean, cars: Array<Object>, dealers: Array<Object>, error: string|null, errors: Array<{ source: string, message: string }> }>}
+ */
+export async function loadInitialData({ force = false } = {}) {
+  const currentState = store.getState();
+
+  if (!force) {
+    if (initialDataPromise) {
+      return initialDataPromise;
+    }
+    if (currentState.initialized) {
+      return {
+        ok: true,
+        cars: currentState.cars,
+        dealers: currentState.dealers,
+        error: null,
+        errors: [],
+      };
+    }
+  }
+
+  const currentGen = ++loadGeneration;
+  store.setState({ loading: true, error: null });
+
+  const requestPromise = (async () => {
+    const [carsResult, dealersResult] = await Promise.allSettled([
+      carsService.getAll(),
+      dealersService.getAll(),
+    ]);
+
+    const prevState = store.getState();
+    const errors = [];
+    const cars = resolveInitialCollection(
+      carsResult,
+      prevState.cars,
+      'cars',
+      'Не удалось загрузить автомобили',
+      errors
+    );
+    const dealers = resolveInitialCollection(
+      dealersResult,
+      prevState.dealers,
+      'dealers',
+      'Не удалось загрузить автосалоны',
+      errors
+    );
+
+    const ok = errors.length === 0;
+    const errorMessage = ok ? null : errors.map((item) => item.message).join('; ');
+
+    if (currentGen === loadGeneration) {
+      store.setState({
+        cars,
+        dealers,
+        loading: false,
+        error: errorMessage,
+        initialized: ok,
+      });
+      eventBus.emit('data-loaded', { ok, cars, dealers, error: errorMessage, errors });
+    }
+
+    return { ok, cars, dealers, error: errorMessage, errors };
+  })().finally(() => {
+    if (initialDataPromise === requestPromise) {
+      initialDataPromise = null;
+    }
+  });
+
+  initialDataPromise = requestPromise;
+  return requestPromise;
 }
