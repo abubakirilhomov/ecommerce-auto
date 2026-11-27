@@ -38,8 +38,8 @@
 *Фокус: защита от взлома (XSS), валидация, авторизация, оффлайн-режим.*
 - [x] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
   - *Файлы*: `src/utils/sanitize.js`, `src/utils/validators.js`
-- [ ] **T-109**: PWA-доработка: индикатор оффлайн-режима и кнопка/баннер установки приложения (`InstallPrompt.js`) + проверка кэширования в DevTools.
-  - *Файлы*: `src/components/ui/InstallPrompt.js`, `src/app.js`, `public/manifest.webmanifest`, `vite.config.js`
+- [ ] **T-109**: Настройка PWA (`public/manifest.webmanifest`, интеграция `vite-plugin-pwa` или `src/sw.js` для кэширования).
+  - *Файлы*: `public/manifest.webmanifest`, `src/sw.js` (или `vite.config.js`)
 
 ---
 

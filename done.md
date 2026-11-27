@@ -44,6 +44,7 @@
 - **Как проверено**:
   - `npm run build` прошел успешно; селекторы фильтрации, `toggleFavorite` и `toggleCompare` (включая ограничение до 3 авто) проверены автотестом на данных из `server/db.json`.
 
+<<<<<<< HEAD
 ### [T-105] Настройка дизайн-системы и тем DaisyUI (AutoUz)
 - **Исполнитель**: Руфина
 - **Ветка**: `feat/rufina-daisyui-theme`
@@ -63,3 +64,15 @@
   - Создан `src/utils/validators.js`: реализованы `validateRequired`, `validateLength`, `normalizeUzPhone`, `validateUzPhone`, `validatePrice`, `validateYear`, `validateMileage`, `validateEmail`, `validateSafeUrl`, `validateForm` и булевы хелперы (`isNonEmpty`, `isValidUzPhone`, `isValidPrice`, `isValidYear`, `isValidEmail`).
 - **Как проверено**:
   - `npm run build` (`vite build`) выполнен успешно; все функции проверены через Node.js (`assert`).
+
+### [T-109] Компонент установки PWA и индикатор оффлайн-режима
+- **Исполнитель**: Абдуллох
+- **Ветка**: `feat/abdulloh-pwa-install`
+- **Дата**: 2026-11-27
+- **Что сделано**:
+  - Создан компонент [InstallPrompt.js](src/components/ui/InstallPrompt.js):
+    - `InstallPrompt(props)` — чистый рендер баннера установки PWA и индикатора оффлайн/онлайн статуса на DaisyUI + Tailwind CSS с экранированием текста через `escapeHtml`.
+    - `initInstallPrompt(customContainer)` — обработка событий `beforeinstallprompt`, `appinstalled`, `online`, `offline`, скрытие баннера на текущую сессию через `sessionStorage`, возврат функции `cleanup()`.
+  - Компонент подключен в [src/app.js](src/app.js) внутри `bootstrap()`.
+- **Как проверено**:
+  - Проверено в браузере через `npm run build` и `npm run preview` (оффлайн/онлайн уведомления и баннер установки PWA).
