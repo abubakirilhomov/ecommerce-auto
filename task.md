@@ -36,10 +36,10 @@
 
 ### 🛡 Абдуллох (12 лет — Безопасность и PWA)
 *Фокус: защита от взлома (XSS), валидация, авторизация, оффлайн-режим.*
-- [ ] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
+- [x] **T-108**: Модуль защиты от XSS (`sanitize.js` с функцией `escapeHtml`) и валидаторы форм (`validators.js` — проверка телефона `+998`, цены, года).
   - *Файлы*: `src/utils/sanitize.js`, `src/utils/validators.js`
-- [ ] **T-109**: Настройка PWA (`public/manifest.webmanifest`, интеграция `vite-plugin-pwa` или `src/sw.js` для кэширования).
-  - *Файлы*: `public/manifest.webmanifest`, `src/sw.js` (или `vite.config.js`)
+- [ ] **T-109**: PWA-доработка: индикатор оффлайн-режима и кнопка/баннер установки приложения (`InstallPrompt.js`) + проверка кэширования в DevTools.
+  - *Файлы*: `src/components/ui/InstallPrompt.js`, `src/app.js`, `public/manifest.webmanifest`, `vite.config.js`
 
 ---
 
@@ -47,7 +47,7 @@
 
 ### 🎬 Ислом (13 лет — Каталог и Медиа)
 *Фокус: машины, характеристики, фото-галереи и визуальная подача авто.*
-- [ ] **T-201**: Компонент карточки авто (`CarCard.js`) и форматтеры цен в UZS/USD (`formatters.js`).
+- [ ] **T-201** *(Переделать: не загружать `auto.zip`, создать ветку `feat/islom-car-card` от `dev`)*: Компонент карточки авто (`CarCard.js`) и форматтеры цен в UZS/USD и пробега (`formatters.js`).
   - *Файлы*: `src/components/cars/CarCard.js`, `src/utils/formatters.js`
 - [ ] **T-202**: Страница каталога (`CatalogPage.js`) с сеткой авто, пагинацией/загрузкой и состоянием «Ничего не найдено».
   - *Файлы*: `src/pages/CatalogPage.js`

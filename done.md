@@ -33,6 +33,7 @@
 - **Как проверено**:
   - `npm run build` выполнен успешно.
 
+<<<<<<< HEAD
 ### [T-110] Расширение `store.js` и фильтрация в `carsService.js`
 - **Исполнитель**: Амирхон
 - **Ветка / Коммит**: `feat/amirxon-store-selectors`
@@ -52,3 +53,13 @@
   - В `index.html` подключены шрифты Google Fonts `Inter` и `Manrope` (с поддержкой кириллицы) и применены базовые классы типографики и плавного переключения темы.
 - **Как проверено**:
   - `npm run build` (`vite build`) выполнен успешно за 929ms; в собранном CSS проверено наличие переменных обеих тем (`light` и `dark`) и шрифтов без дублирования стандартных тем DaisyUI.
+
+### [T-108] Модуль защиты от XSS и валидаторы форм
+- **Исполнитель**: Абдуллох
+- **Ветка**: `feat/abdulloh-validators-xss`
+- **Дата**: 2026-11-25
+- **Что сделано**:
+  - Дополнен `src/utils/sanitize.js`: добавлены `sanitizeUrl` (блокировка `javascript:`, `data:`, `vbscript:`, `//...` и кодирование опасных символов атрибутов) и `sanitizeText`, сохранена `escapeHtml`.
+  - Создан `src/utils/validators.js`: реализованы `validateRequired`, `validateLength`, `normalizeUzPhone`, `validateUzPhone`, `validatePrice`, `validateYear`, `validateMileage`, `validateEmail`, `validateSafeUrl`, `validateForm` и булевы хелперы (`isNonEmpty`, `isValidUzPhone`, `isValidPrice`, `isValidYear`, `isValidEmail`).
+- **Как проверено**:
+  - `npm run build` (`vite build`) выполнен успешно; все функции проверены через Node.js (`assert`).
