@@ -75,7 +75,7 @@
   - *Файлы*: `src/pages/DealerPage.js`, `src/components/dealer/DealerCarForm.js`
 
 ### 🛡 Абдуллох (12 лет — Роли и Защита кабинета)
-- [ ] **T-304**: Страница входа и выбора роли (`AuthPage.js` + `authService.js`): Клиент или Автосалон, защита маршрута `DealerPage` от неавторизованных пользователей.
+- [x] **T-304**: Страница входа и выбора роли (`AuthPage.js` + `authService.js`): Клиент или Автосалон, защита маршрута `DealerPage` от неавторизованных пользователей.
   - *Файлы*: `src/pages/AuthPage.js`, `src/services/authService.js`
 
 ### 🎨 Руфина (12 лет — Финальная полировка UI)

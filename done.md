@@ -54,3 +54,14 @@
   - Компонент подключен в [src/app.js](src/app.js) внутри `bootstrap()`.
 - **Как проверено**:
   - Проверено в браузере через `npm run build` и `npm run preview` (оффлайн/онлайн уведомления и баннер установки PWA).
+
+### [T-304] Сервис авторизации, страница входа и защита маршрута `/dealer`
+- **Исполнитель**: Абдуллох
+- **Дата**: 2026-11-27
+- **Что сделано**:
+  - Создан сервис [src/services/authService.js](src/services/authService.js): загрузка пользователей из `server/db.json` (`GET /users`), вход по готовому профилю (`loginAsUser`), вход/регистрация по email с выбором роли (`client` / `dealer`) и привязкой автосалона (`login`), сохранение `currentUser` в `store` (и `localStorage`), событие `auth-change` через `eventBus`, `logout()`, `isAuthenticated()`, `isDealer()`.
+  - Создана страница [src/pages/AuthPage.js](src/pages/AuthPage.js): быстрый вход по аккаунтам из базы (`dealer@autouz.uz`, `client@autouz.uz`), форма входа/регистрации с выбором роли и списка автосалонов, валидация через [src/utils/validators.js](src/utils/validators.js) и защита от XSS через `escapeHtml`.
+  - В [src/app.js](src/app.js) подключён маршрут `/auth` (`renderAuthPage`), добавлена защита маршрута `/dealer` (`protectDealerRoute`) и обновление кнопки входа в шапке по `auth-change`.
+  - Подготовлен [src/utils/validators.js](src/utils/validators.js) (так как ветка от `main` ещё не содержала T-108).
+- **Как проверено**:
+  - Ожидает локальной проверки `npm run build`, запуска `npm run server` + `npm run dev` и создания PR в `dev`.

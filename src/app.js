@@ -1,8 +1,11 @@
 import './styles/main.css';
 import { Router } from './core/router.js';
 import { store } from './core/store.js';
+import { eventBus } from './core/eventBus.js';
 import { renderToContainer } from './core/component.js';
 import { carsService } from './services/carsService.js';
+import { authService, USER_ROLES } from './services/authService.js';
+import { renderAuthPage } from './pages/AuthPage.js';
 import { escapeHtml } from './utils/sanitize.js';
 import { initInstallPrompt } from './components/ui/InstallPrompt.js';
 
@@ -11,8 +14,12 @@ import { initInstallPrompt } from './components/ui/InstallPrompt.js';
  */
 function renderBaseHeader() {
   const headerEl = document.getElementById('app-header');
-  const { theme } = store.getState();
+  const { theme, currentUser } = store.getState();
   document.documentElement.setAttribute('data-theme', theme);
+
+  const authAction = currentUser
+    ? `<a href="#/auth" class="btn btn-ghost btn-sm">${escapeHtml(currentUser.name)}</a>`
+    : '<a href="#/auth" class="btn btn-primary btn-sm">Войти</a>';
 
   renderToContainer(
     headerEl,
@@ -21,11 +28,12 @@ function renderBaseHeader() {
         <div class="flex-1">
           <a href="#/" class="btn btn-ghost text-xl font-bold text-primary">🚗 AutoUz</a>
         </div>
-        <div class="flex-none gap-2">
+        <div class="flex-none gap-2 flex-wrap">
           <a href="#/catalog" class="btn btn-ghost btn-sm">Каталог</a>
           <a href="#/compare" class="btn btn-ghost btn-sm">Сравнение</a>
           <a href="#/favorites" class="btn btn-ghost btn-sm">Избранное</a>
           <a href="#/dealer" class="btn btn-outline btn-primary btn-sm">Автосалонам</a>
+          ${authAction}
         </div>
       </div>
     `
@@ -83,8 +91,46 @@ function renderPlaceholderPage(title, ownerHint) {
   };
 }
 
+/**
+ * Защищает маршрут кабинета автосалона от неавторизованных пользователей и роли Клиент.
+ * @param {Function} renderDealerRoute
+ */
+function protectDealerRoute(renderDealerRoute) {
+  return (outlet, params) => {
+    const currentUser = authService.getCurrentUser();
+
+    if (!currentUser) {
+      window.location.hash = '#/auth?redirect=/dealer&reason=auth-required';
+      return null;
+    }
+
+    if (currentUser.role !== USER_ROLES.DEALER) {
+      renderToContainer(
+        outlet,
+        `
+          <div class="card bg-base-100 shadow-md p-8 text-center max-w-xl mx-auto">
+            <h2 class="text-2xl font-bold mb-2">Доступ ограничен</h2>
+            <p class="opacity-75 mb-6">
+              Вы вошли как <strong>${escapeHtml(currentUser.name)}</strong> (Клиент).
+              Кабинет автосалона доступен только для роли «Автосалон».
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+              <a href="#/auth?redirect=/dealer&reason=dealer-only" class="btn btn-primary">Сменить аккаунт</a>
+              <a href="#/" class="btn btn-outline">На главную</a>
+            </div>
+          </div>
+        `
+      );
+      return null;
+    }
+
+    return renderDealerRoute(outlet, params);
+  };
+}
+
 function bootstrap() {
   renderBaseHeader();
+  eventBus.on('auth-change', renderBaseHeader);
   initInstallPrompt();
 
   const appOutlet = document.getElementById('app');
@@ -96,8 +142,13 @@ function bootstrap() {
       { path: '/compare', render: renderPlaceholderPage('Сравнение авто', 'Раздел в разработке (Миразим)') },
       { path: '/favorites', render: renderPlaceholderPage('Избранное', 'Раздел в разработке (Ахмаджон)') },
       { path: '/checkout/:id', render: renderPlaceholderPage('Оформление заявки', 'Раздел в разработке (Ахмаджон)') },
-      { path: '/dealer', render: renderPlaceholderPage('Кабинет автосалона', 'Раздел в разработке (Ахмаджон + Абдуллох)') },
-      { path: '/auth', render: renderPlaceholderPage('Вход / Регистрация', 'Раздел в разработке (Абдуллох)') },
+      {
+        path: '/dealer',
+        render: protectDealerRoute(
+          renderPlaceholderPage('Кабинет автосалона', 'Раздел в разработке (Ахмаджон + Абдуллох)')
+        ),
+      },
+      { path: '/auth', render: renderAuthPage },
       { path: '*', render: renderPlaceholderPage('404 — Страница не найдена', 'Проверьте адрес маршрута') },
     ],
     appOutlet
