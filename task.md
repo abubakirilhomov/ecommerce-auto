@@ -20,7 +20,7 @@
   - *Файлы*: `src/core/router.js`, `src/core/store.js`, `src/core/eventBus.js`, `src/core/component.js`
 - [x] **T-104**: Слой API-клиента (`apiClient.js` и `carsService.js`, `dealersService.js`).
   - *Файлы*: `src/services/apiClient.js`, `src/services/carsService.js`, `src/services/dealersService.js`
-- [ ] **T-110**: Расширение `store.js` (селекторы фильтрации авто и хелперы `toggleFavorite`, `toggleCompare`) + ревью PR команды в `dev`.
+- [x] **T-110**: Расширение `store.js` (селекторы фильтрации авто и хелперы `toggleFavorite`, `toggleCompare`) + ревью PR команды в `dev`.
   - *Файлы*: `src/core/store.js`, `src/services/carsService.js`
 
 ### 🎨 Руфина (12 лет — UI/UX и Визуал)
