@@ -4,6 +4,7 @@ import { store } from './core/store.js';
 import { renderToContainer } from './core/component.js';
 import { carsService } from './services/carsService.js';
 import { escapeHtml } from './utils/sanitize.js';
+import { initInstallPrompt } from './components/ui/InstallPrompt.js';
 
 /**
  * Временная базовая шапка (будет заменена компонентом Руфины Header.js).
@@ -84,6 +85,7 @@ function renderPlaceholderPage(title, ownerHint) {
 
 function bootstrap() {
   renderBaseHeader();
+  initInstallPrompt();
 
   const appOutlet = document.getElementById('app');
   const router = new Router(
